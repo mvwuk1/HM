@@ -37,9 +37,8 @@
             var blnSavable = false;
 
             $(document).ready(function(){
-                $(".cControlsOuter").hide();
                 $("#selBase").val(3);
-
+                $(".cControlsOuter").hide();
                 $("#cmdSelect").on("click", function(e) {
                     e.preventDefault;
                     fncCleanUp();                    
@@ -58,9 +57,10 @@
                     Base = $("#selBase").val();
                     Color = $("#selColor").val();
                     fncDebug("s2");
+                    $("#ImgHolder").show();
+                    $("#Imgage").hide();
                     $('#CanvasOuter1').html('');
                     fncSetShade(show,Base,Color);
-                    fncCreateImage(show);
                 });
                 $("#selShow").on("change",function() {
                     $("#selBase").val($(this).val());
@@ -78,10 +78,11 @@
                     var position = $('.cHM_Image').position();
                     $('.cGridOuter').css('position','absolute');
                     $('.cGridOuter').css('top',position.top);
-
                     html2canvas(document.querySelector("#ImgHolder")).then(canvas => {
+                        $('#CanvasOuter1').append("<span class=\"cSaveText\">Right Click to save image.</span>");
                         $('#CanvasOuter1').append(canvas)
-                    });    
+                        $("#ImgHolder").hide();
+                    });  
                 });                
             });
 
@@ -104,24 +105,24 @@
                 <div class="cSetQuest">
                     <form method="post" action="logout.php" id="SelectQuestFrm">
                         <select class="cDropdown-menu" id="selQuest">
-                            <option value="1" data-json="Q16_Aqua_DD.json">Q16 Aqua DD</a></option>
-                            <option value="2" data-json="Q16_Aqua_NONDD.json">Q16 Aqua NON DD</a></option>
-                            <option value="3" data-json="Q16DebDD.json">Q16 Deb DD</a></option>
-                            <option value="4" data-json="Q16_Deb_nonDD.json">Q16 Deb NON DD</a></option>
-                            <option value="5" data-json="Q16_DP_DD.json">Q16 DP DD</a></option>
-                            <option value="6" data-json="Q16_DP_NONDD.json">Q16 DP NON DD</a></option>
-                            <option value="7" data-json="Q17_Aqua_DD.json">Q17 Aqua DD</a></option>
-                            <option value="8" data-json="Q17_Aqua_NONDD.json">Q17 Aqua NON DD</a></option>
-                            <option value="9" data-json="Q17_Deb_DD.json">Q17 Deb DD</a></option>
-                            <option value="10" data-json="Q17_Deb_nonDD.json">Q17 Deb NON DD</a></option>
-                            <option value="11" data-json="Q17_DP_DD.json">Q17 DP DD</a></option>
-                            <option value="12" data-json="Q17_DP_NONDD.json">Q17 DP NON DD</a></option>
-                            <option value="13" data-json="Q18_Aqua_DD.json">Q18 Aqua DD</a></option>
-                            <option value="14" data-json="Q18_Aqua_NONDD.json">Q18 Aqua NON DD</a></option>
-                            <option value="15" data-json="Q18_Deb_DD.json">Q18 Deb DD</a></option>
-                            <option value="16" data-json="Q18_Deb_nonDD.json">Q18 Deb NON DD</a></option>
-                            <option value="17" data-json="Q18_DP_DD.json">Q18 DP DD</a></option>
-                            <option value="18" data-json="Q18_DP_NONDD.json">Q18 DP NON DD</a></option>                    
+                            <option value="1" data-json="Q16_Aqua_DD.json">Q16 Aqua DD</option>
+                            <option value="2" data-json="Q16_Aqua_NONDD.json">Q16 Aqua NON DD</option>
+                            <option value="3" data-json="Q16DebDD.json">Q16 Deb DD</option>
+                            <option value="4" data-json="Q16_Deb_nonDD.json">Q16 Deb NON DD</option>
+                            <option value="5" data-json="Q16_DP_DD.json">Q16 DP DD</option>
+                            <option value="6" data-json="Q16_DP_NONDD.json">Q16 DP NON DD</option>
+                            <option value="7" data-json="Q17_Aqua_DD.json">Q17 Aqua DD</option>
+                            <option value="8" data-json="Q17_Aqua_NONDD.json">Q17 Aqua NON DD</option>
+                            <option value="9" data-json="Q17_Deb_DD.json">Q17 Deb DD</option>
+                            <option value="10" data-json="Q17_Deb_nonDD.json">Q17 Deb NON DD</option>
+                            <option value="11" data-json="Q17_DP_DD.json">Q17 DP DD</option>
+                            <option value="12" data-json="Q17_DP_NONDD.json">Q17 DP NON DD</option>
+                            <option value="13" data-json="Q18_Aqua_DD.json">Q18 Aqua DD</option>
+                            <option value="14" data-json="Q18_Aqua_NONDD.json">Q18 Aqua NON DD</option>
+                            <option value="15" data-json="Q18_Deb_DD.json">Q18 Deb DD</option>
+                            <option value="16" data-json="Q18_Deb_nonDD.json">Q18 Deb NON DD</option>
+                            <option value="17" data-json="Q18_DP_DD.json">Q18 DP DD</option>
+                            <option value="18" data-json="Q18_DP_NONDD.json">Q18 DP NON DD</option>                    
                         </select>
 
                         <button type="button" class="btn btn-primary" name="cmdSelect" id="cmdSelect" >Set</button> 
@@ -146,8 +147,9 @@
                             <option value="2">Color: Red</option>
                         </select>
                         <label for="minClick">Min Click</label>
-                        <input class="Pin" size="4" maxlength="4" type="number" class="form-control" id="minClick" name="minClick" value="1">
+                        <input class="Pin" size="4" maxlength="4" type="number" id="minClick" name="minClick" value="1">
                         <button type="button" class="btn btn-primary" name="cmdSelect" id="cmdSelect2" >Show Data</button> 
+                        <input type="button" class="btn btn-primary" name="btnSave1" id="btnSave1" value="Convert to Image"/>                        
                     </div>
                     <div class="cInfo">
 
@@ -157,18 +159,13 @@
                         <div class="cGridOuter" id="gridOuter_non"></div>
                         <div class="cGridOuter" id="gridOuter_mob"></div>                
                     </div>
+                    <div id="image">            				
+                        <div id="CanvasOuter1"></div>
+                    </div>                    
                 </div>
             </div>
-            <div id="image">            				
-                <h4>Right click on the image to save</h4>
-                <input type="button" id="btnSave1" value="Create PNG"/>
-                <div class="cLine"></div>
-                <div id="CanvasOuter1">
-                    <h3>ImageOut</h3>
-                </div> 
 
-            </div>
-        
+        </div>
 
     </body>
 </html>
