@@ -34,11 +34,13 @@
             var intBase = 0;
             var debug = false;
             var intMinClick = 0;
+            var intOffSet = 0;
             var blnSavable = false;
 
             $(document).ready(function(){
                 $("#selBase").val(3);
                 $(".cControlsOuter").hide();
+                fncColorPicker();
                 $("#cmdSelect").on("click", function(e) {
                     e.preventDefault;
                     fncCleanUp();                    
@@ -55,25 +57,29 @@
                     fncDebug("s1");
                     show = $("#selShow").val();
                     Base = $("#selBase").val();
-                    Color = $("#selColor").val();
+                    Color = $("#color").val();
                     fncDebug("s2");
                     $("#ImgHolder").show();
                     $("#Imgage").hide();
                     $('#CanvasOuter1').html('');
-                    fncSetShade(show,Base,Color);
+                    fncSetShadeV2(show,Base,Color);
                 });
+
                 $("#selShow").on("change",function() {
                     $("#selBase").val($(this).val());
                 });
+
                 $('.cHM_Image').on('load', function() {
                     fncDebug(5);
                     fncFormatGrid();
                 });
+
                 $('.cHM_Image').on('error', function() {
                     blnSavable = false;
                     strLocalImgURL = strImgURL;
                     $(".cHM_Image").attr("src",strLocalImgURL);
                 });
+
                 $("#btnSave1").click(function() { 
                     var position = $('.cHM_Image').position();
                     $('.cGridOuter').css('position','absolute');
@@ -83,7 +89,7 @@
                         $('#CanvasOuter1').append(canvas)
                         $("#ImgHolder").hide();
                     });  
-                });                
+                });
             });
 
 
@@ -137,25 +143,42 @@
                 <div id="debugStage"></div>
                 <div class="cOuter">
                     <div class="cControlsOuter">
-                        <select class="cDropdown-menu" id="selBase">
+                        <select class="cDropdown-menu" id="selBase" title="Select the base used for calculating the highlight percentage for cells.">
                             <option value="1">Base: All Respondents</option>
                             <option value="2">Base: Respondents with Data</option>
                             <option value="3">Base: Non Mobile Respondents</option>
                             <option value="4">Base: Mobile Respondents</option>
                         </select>
-                        <select class="cDropdown-menu" id="selShow">
+                        <select class="cDropdown-menu" id="selShow" title="Select which respondents to show based on the device the used to answer the questionnaire.">
                             <option value="3">Show: Non Mobile Respondents</option>
                             <option value="4">Show: Mobile Respondents</option>
                             <!-- <option value="1">Show: All Respondents</option> -->
                         </select>
-                        <select class="cDropdown-menu" id="selColor">
-                            <option value="1">Color: Green</option>
-                            <option value="2">Color: Red</option>
-                        </select>
-                        <label for="minClick">Min Click</label>
-                        <input class="Pin" size="4" maxlength="4" type="number" id="minClick" name="minClick" value="1">
-                        <button type="button" class="btn btn-primary" name="cmdSelect" id="cmdSelect2" >Show Data</button> 
-                        <input type="button" class="btn btn-primary" name="btnSave1" id="btnSave1" value="Convert to Image"/>                        
+                        <label for="color" title="Select the shading colur. Click on the button to show a colour picker.">Color:</label>
+                        <input type="text" id="color" name="color" size="8" value="#123456"  title="Select the shading colur. Click on the button to show a colour picker."/>
+                        <button type="button" class=".btn-xs btn-primary" data-toggle="modal" data-target="#ColPickWrapper" title="Select the shading colur. Click on the button to show a colour picker.">...</button>
+                        <label for="shadeOffset" title="Enter the shading offet e.g. if the cell value is 10% of the base and the offset is 50, the cell with be 60% shaded.">Shade Offset:</label>
+                        <input type="text" id="shadeOffset" name="shadeOffset" size="2" value="50"  title="Enter the shading offet e.g. if the cell value is 10% of the base and the offset is 50, the cell with be 60% shaded."/>
+                        <div id="ColPickWrapper" class="modal fade" role="dialog">
+                            <div class="modal-dialog  modal-sm">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title">Select Colour</h4>
+                                    </div>
+                                    <div class="modal-body">                                
+                                        <div id="picker"></div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div>                                    
+                        </div>
+                        <label for="minClick" title="The minimun number of responses before a cell  is shown as shaded.">Min Click</label>
+                        <input size="4" maxlength="4" type="number" id="minClick" name="minClick" value="1" title="The minimun number of responses before a cell  is shown as shaded.">
+                        <button type="button" class="btn btn-primary" name="cmdSelect" id="cmdSelect2"  title="Show the shading on the image based on the responses.">Show Data</button> 
+                        <input type="button" class="btn btn-primary" name="btnSave1" id="btnSave1" value="Convert to Image"   title="Show image and shading so it can be saved by right clicking on the imnage."/>                        
                     </div>
                     <div class="cInfo">
 
