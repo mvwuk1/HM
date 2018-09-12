@@ -1,0 +1,141 @@
+<html>
+    <head>
+        <!-- Latest Bootstrap compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+        <!-- jQuery library -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+        <!-- Latest Bootstrap compiled JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
+
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans|Kanit" rel="stylesheet">
+        <script src="inc/html2canvas.js"></script>
+        <script src="inc/canvas2Image.js"></script>
+        <link type="text/css" rel="stylesheet" href="inc/spin/waitMe.css">
+        <script src="inc/spin/waitMe.js"></script>        
+        <link href="style/s1.css" rel="stylesheet">
+        <style>
+
+        </style>
+        <script>
+function fncBtnDisable() {
+    $('.cInfo').waitMe({
+        effect: 'stretch',
+        text: 'Processing',
+        bg: 'rgba(255,255,255,0.7)',
+        color: '#000',
+        waitTime: -1
+    });
+    $("#cmdSelect").prop('disabled', 'disabled');
+    $("#cmdSelect2").prop('disabled', 'disabled');
+    $("#btnSave1").prop('disabled', 'disabled');
+    $("BtnColor").prop('disabled', 'disabled');
+
+}
+function fncBtnEnable() {
+    $('.cInfo').waitMe('hide');
+    $("#cmdSelect").prop('disabled','');
+    $("#cmdSelect2").prop('disabled', );
+    $("#btnSave1").prop('disabled', '');
+    $("BtnColor").prop('disabled', '');
+}
+
+                $(document).ready(function(){
+                    fncBtnDisable();
+
+                    $("#B1").on("click",function() {
+                        fncBtnEnable(); 
+                    });
+                    $("#cmdSelect").on("click",function() {
+                        fncBtnDisable();
+                    });
+                });
+        </script>        
+    </head>
+
+    <body>
+            <div class="container">
+                    <?php
+                    
+                    include_once "inc/header.php"; 
+                    ?>
+                    <div class="cLogoutCmd">
+                        
+                        
+                            <input type="button" id="B1" value="logout" />    
+                        
+                    </div>
+                    <div class="cMain">
+                        <div class="cSetQuest">
+                            <form method="post" action="logout.php" id="SelectQuestFrm">
+                                <select class="cDropdown-menu" id="selQuest">
+                                    <option value="1" data-json="Q16_Aqua_DD.json">Q16 Aqua DD</option>
+                                    <option value="2" data-json="Q16_Aqua_NONDD.json">Q16 Aqua NON DD</option>
+                                    <option value="3" data-json="Q16DebDD.json">Q16 Deb DD</option>
+                                    <option value="4" data-json="Q16_Deb_nonDD.json">Q16 Deb NON DD</option>
+                                    <option value="5" data-json="Q16_DP_DD.json">Q16 DP DD</option>
+                                    <option value="6" data-json="Q16_DP_NONDD.json">Q16 DP NON DD</option>
+                                    <option value="7" data-json="Q17_Aqua_DD.json">Q17 Aqua DD</option>
+                                    <option value="8" data-json="Q17_Aqua_NONDD.json">Q17 Aqua NON DD</option>
+                                    <option value="9" data-json="Q17_Deb_DD.json">Q17 Deb DD</option>
+                                    <option value="10" data-json="Q17_Deb_nonDD.json">Q17 Deb NON DD</option>
+                                    <option value="11" data-json="Q17_DP_DD.json">Q17 DP DD</option>
+                                    <option value="12" data-json="Q17_DP_NONDD.json">Q17 DP NON DD</option>
+                                    <option value="13" data-json="Q18_Aqua_DD.json">Q18 Aqua DD</option>
+                                    <option value="14" data-json="Q18_Aqua_NONDD.json">Q18 Aqua NON DD</option>
+                                    <option value="15" data-json="Q18_Deb_DD.json">Q18 Deb DD</option>
+                                    <option value="16" data-json="Q18_Deb_NONDD.json">Q18 Deb NON DD</option>
+                                    <option value="17" data-json="Q18_DP_DD.json">Q18 DP DD</option>
+                                    <option value="18" data-json="Q18_DP_NONDD.json">Q18 DP NON DD</option>
+                                    <option value="19" data-json="Q19_Aqua_DD.json">Q19 Aqua DD</option>
+                                    <option value="20" data-json="Q19_Aqua_NONDD.json">Q19 Aqua NON DD</option>
+                                    <option value="21" data-json="Q19_Deb_DD.json">Q19 Deb DD</option>
+                                    <option value="22" data-json="Q19_Deb_NONDD.json">Q19 Deb NON DD</option>
+                                    <option value="23" data-json="Q19_DP_DD.json">Q19 DP DD</option>
+                                    <option value="24" data-json="Q19_DP_NONDD.json">Q19 DP NON DD</option>                             
+                                </select>
+        
+                                <button type="button" class="btn btn-primary" name="cmdSelect" id="cmdSelect" >Set</button> 
+                            </form>
+                        </div>
+                        <div id="debugStage"></div>
+                        <div class="cOuter">
+                            <div class="cControlsOuter">
+                                <select class="cDropdown-menu" id="selBase">
+                                    <option value="1">Base: All Respondents</option>
+                                    <option value="2">Base: Respondents with Data</option>
+                                    <option value="3">Base: Non Mobile Respondents</option>
+                                    <option value="4">Base: Mobile Respondents</option>
+                                </select>
+                                <select class="cDropdown-menu" id="selShow">
+                                    <option value="3">Show: Non Mobile Respondents</option>
+                                    <option value="4">Show: Mobile Respondents</option>
+                                    <!-- <option value="1">Show: All Respondents</option> -->
+                                </select>
+                                <select class="cDropdown-menu" id="selColor">
+                                    <option value="1">Color: Green</option>
+                                    <option value="2">Color: Red</option>
+                                </select>
+                                <label for="minClick">Min Click</label>
+                                <input class="Pin" size="4" maxlength="4" type="number" id="minClick" name="minClick" value="1">
+                                <button type="button" class="btn btn-primary" name="cmdSelect" id="cmdSelect2" >Show Data</button> 
+                                <input type="button" class="btn btn-primary" name="btnSave1" id="btnSave1" value="Convert to Image"/>                        
+                            </div>
+                            <div class="cInfo">
+        
+                            </div>
+                            <div id="ImgHolder">
+                                <img class="cHM_Image" src="" />
+                                <div class="cGridOuter" id="gridOuter_non"></div>
+                                <div class="cGridOuter" id="gridOuter_mob"></div>                
+                            </div>
+                            <div id="image">            				
+                                <div id="CanvasOuter1"></div>
+                            </div>                    
+                        </div>
+                    </div>
+        
+                </div>                
+    </body>
+</html>

@@ -1,0 +1,64 @@
+<html>
+    <head>
+        <!-- Latest Bootstrap compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+        <!-- jQuery library -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+        <!-- Latest Bootstrap compiled JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
+
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans|Kanit" rel="stylesheet">
+        <script src="inc/html2canvas.js"></script>
+        <script src="inc/canvas2Image.js"></script>
+        <style>
+            #ImgHolder {
+                width:auto;
+            }
+            .cHM_Image {
+                
+            }
+        </style>
+        <script>
+                $(document).ready(function(){
+                    $('#img-out').width($('.cHM_Image').width())
+                    $("#btnSave1").click(function() { 
+                        html2canvas(document.querySelector(".cOuter")).then(canvas => {
+                            $('#img-out').append(canvas)
+                        });    
+                    });
+                    $("#btnSave2").click(function() { 
+                        var canvas = $('#img-out').find('canvas');
+                        var type = 'jpg',
+                        w = $('#img-out').width(),
+                        h = $('#img-out').height();
+                        $('#img-out').width();
+                        //Canvas2Image.saveAsImage(canvas, w, h, type);
+                        $('#img-2Save').append(Canvas2Image.convertToImage(canvas, w, h, type));
+
+                        alert('saved');
+                    });
+
+                });
+        </script>        
+    </head>
+
+    <body>
+        <input type="button" id="btnSave1" value="Create PNG"/>
+        <input type="button" id="btnSave2" value="Save PNG"/>
+        <div class="cOuter">
+            <div id="ImgHolder">
+                <img class="cHM_Image" src="images/vwrs_logo.png" />
+            </div>
+        </div>
+
+
+        <div id="img-out">
+            <h3>ImageOut</h3>
+        </div> 
+        <div id="img-2Save">
+
+        </div>                
+    </body>
+</html>

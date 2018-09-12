@@ -1,0 +1,30 @@
+<html>
+<head>
+    <?php
+        include_once "inc/lib1.php"; // jQuery and Bootstrap
+    ?>
+    <script>
+        $(document).ready(function(){
+
+$.getJSON( "Q16_Aqua_NONDD.json", function( data ) {
+    var respCount = 0;
+    $.each( data, function( key, val ) {
+        $('#status2').text('Respondents: ' + respCount);
+        respCount++;
+    });
+});
+        });
+    </script>
+</head>
+	<body>
+		<p>
+			<div id="status1"></div>
+		</p>
+		<p>
+			<div id="status2"></div>
+		</p>
+		<p>			
+			<div id="status3"></div>
+		</p>
+	</body>
+</html>
