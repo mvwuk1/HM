@@ -37,10 +37,13 @@
             var blnSavable = false;
 
             $(document).ready(function(){
+                fncBtnDisable();
                 $("#selBase").val(3);
+
                 $(".cControlsOuter").hide();
                 $("#cmdSelect").on("click", function(e) {
                     e.preventDefault;
+                    fncBtnDisable();
                     fncCleanUp();                    
                     selQVal = $("#selQuest").val();
                     strParQid = $("#selQuest option[value='" + selQVal + "']").text();
@@ -48,9 +51,9 @@
                     strJSONFilename =  "data/" + selQJSON;
                     fncDebug("1 Call Process");
                     fncProcessJson();
-
                 });
                 $("#cmdSelect2").on("click", function(e) {
+                    fncBtnDisable();
                     e.preventDefault;
                     fncDebug("s1");
                     show = $("#selShow").val();
@@ -75,6 +78,7 @@
                     $(".cHM_Image").attr("src",strLocalImgURL);
                 });
                 $("#btnSave1").click(function() { 
+                    fncBtnDisable();
                     var position = $('.cHM_Image').position();
                     $('.cGridOuter').css('position','absolute');
                     $('.cGridOuter').css('top',position.top);
@@ -82,8 +86,11 @@
                         $('#CanvasOuter1').append("<span class=\"cSaveText\">Right Click to save image.</span>");
                         $('#CanvasOuter1').append(canvas)
                         $("#ImgHolder").hide();
-                    });  
-                });                
+                        fncBtnEnable();
+                    });
+
+                });
+                fncBtnEnable();
             });
 
 

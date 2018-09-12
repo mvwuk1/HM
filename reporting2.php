@@ -38,10 +38,12 @@
             var blnSavable = false;
 
             $(document).ready(function(){
+                fncBtnDisable();
                 $("#selBase").val(3);
                 $(".cControlsOuter").hide();
                 fncColorPicker();
                 $("#cmdSelect").on("click", function(e) {
+                    fncBtnDisable();
                     e.preventDefault;
                     fncCleanUp();                    
                     selQVal = $("#selQuest").val();
@@ -53,6 +55,7 @@
 
                 });
                 $("#cmdSelect2").on("click", function(e) {
+                    fncBtnDisable();
                     e.preventDefault;
                     fncDebug("s1");
                     show = $("#selShow").val();
@@ -81,6 +84,7 @@
                 });
 
                 $("#btnSave1").click(function() { 
+                    fncBtnDisable();
                     var position = $('.cHM_Image').position();
                     $('.cGridOuter').css('position','absolute');
                     $('.cGridOuter').css('top',position.top);
@@ -88,8 +92,10 @@
                         $('#CanvasOuter1').append("<span class=\"cSaveText\">Right Click to save image.</span>");
                         $('#CanvasOuter1').append(canvas)
                         $("#ImgHolder").hide();
+                        fncBtnEnable();
                     });  
                 });
+                fncBtnEnable();
             });
 
 
@@ -155,8 +161,8 @@
                             <!-- <option value="1">Show: All Respondents</option> -->
                         </select>
                         <label for="color" title="Select the shading colur. Click on the button to show a colour picker.">Color:</label>
-                        <input type="text" id="color" name="color" size="8" value="#123456"  title="Select the shading colur. Click on the button to show a colour picker."/>
-                        <button type="button" class=".btn-xs btn-primary" data-toggle="modal" data-target="#ColPickWrapper" title="Select the shading colur. Click on the button to show a colour picker.">...</button>
+                        <input type="text" id="color" name="color" size="8" value="#BCD02F"  title="Select the shading colur. Click on the button to show a colour picker."/>
+                        <button id="BtnColor" type="button" class=".btn-xs btn-primary" data-toggle="modal" data-target="#ColPickWrapper" title="Select the shading colur. Click on the button to show a colour picker.">...</button>
                         <label for="shadeOffset" title="Enter the shading offet e.g. if the cell value is 10% of the base and the offset is 50, the cell with be 60% shaded.">Shade Offset:</label>
                         <input type="text" id="shadeOffset" name="shadeOffset" size="2" value="50"  title="Enter the shading offet e.g. if the cell value is 10% of the base and the offset is 50, the cell with be 60% shaded."/>
                         <div id="ColPickWrapper" class="modal fade" role="dialog">

@@ -8,13 +8,23 @@
 		if ($pin == "2476" && $rid == "34598") {
 			$count = 1;
 		}
-
-		// If result matched $strUsername and $strPassword, table row must be 1 row
-		if($count==1) {
-			$_SESSION['LoginStatus'] = "Logged In";
-			$_SESSION['rid'] = $rid;
-			header("location:reporting.php");
+		if ($pin == "2476" && $rid == "34599") {
+			$count = 2;
 		}
+		// If result matched $strUsername and $strPassword, table row must be 1 row
+		if ($count>0) {
+			if($count==1) {
+				$_SESSION['LoginStatus'] = "Logged In";
+				$_SESSION['rid'] = $rid;
+				header("location:reporting.php");
+			}
+			if($count==2) {
+				$_SESSION['LoginStatus'] = "Logged In";
+				$_SESSION['rid'] = $rid;
+				header("location:reporting2.php");
+			}
+		}
+
 		else{
 
 			$pass_rid = "&s=" . $rid;

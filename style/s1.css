@@ -45,8 +45,18 @@
   .Pin {
       width: 75px;
   }
-
-  .cContainer {
+  #shadeOffset {
+    width: 35px;      
+  }
+  #minClick {
+    width: 50px;      
+  }
+#color {
+    width: 75px;
+    text-align: center;
+    display: inline-block;
+}
+.cContainer {
     padding: 20px;
 }
 .cGridCell .tooltiptext {
@@ -82,4 +92,21 @@
 .cSaveText {
     font-size: 18px;
     color: blue;
+}
+
+.modal-dialog {
+    position: absolute;
+    top: 50px;
+    right: -300px;
+    bottom: 0;
+    left: 0;
+    z-index: 10040;
+    overflow: auto;
+    overflow-y: auto;
+  }
+.cInfo {
+    min-height: 125px;
+    background-color: #e1e7f2;
+    padding: 10px;
+    margin-top: 15px;
 }
